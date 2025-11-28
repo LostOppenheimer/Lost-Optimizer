@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "Optimizing Arch Linux System..."
+echo
+
+# Update package databases and upgrade system
+echo "Updating package databases and upgrading system..."
+pacman -Syu --noconfirm
+echo "System updated."
+echo
+
+# Clean package cache (keep last 3 versions)
+echo "Cleaning package cache..."
+paccache -rk3
+echo "Package cache cleaned."
+echo
+
+# Remove orphaned packages
+echo "Removing orphaned packages..."
+pacman -Qdtq | pacman -Rns --noconfirm -
+echo "Orphaned packages removed."
+echo
+
+# Clear temporary files
+echo "Clearing temporary files..."
+rm -rf /tmp/* 2>/dev/null
+rm -rf ~/.cache/thumbnails/* 2>/dev/null  # Optional: Clear thumbnail cache
+echo "Temporary files cleared."
+echo
+
+# Optional: Run a full system cleanup with bleachbit (uncomment if installed)
+# echo "Running Bleachbit for deep cleanup..."
+# bleachbit -c --preset  # Requires bleachbit to be installed (pacman -S bleachbit)
+# echo "Bleachbit cleanup completed."
+
+# Optional: Check and repair filesystem (uncomment for ext4; requires unmounting /)
+# echo "Checking filesystem on / (requires unmounting)..."
+# umount /  # DANGER: This unmounts root; only do if you know what you're doing
+# fsck.ext4 /dev/sdX  # Replace /dev/sdX with your root partition
+# mount /dev/sdX /    # Remount
+# echo "Filesystem checked."
+
+echo "Optimization complete. Reboot recommended for full effect."
