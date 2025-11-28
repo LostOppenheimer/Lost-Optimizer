@@ -1,0 +1,36 @@
+@echo off
+echo Optimizing Windows System...
+echo.
+
+REM Empty the Recycle Bin
+echo Emptying Recycle Bin...
+rd /s /q %systemdrive%\$Recycle.Bin 2>nul
+echo Recycle Bin emptied.
+echo.
+
+REM Delete temporary files
+echo Deleting temporary files...
+del /f /q %temp%\*.* 2>nul
+del /f /q %systemroot%\temp\*.* 2>nul
+del /f /q %systemroot%\Prefetch\*.* 2>nul
+echo Temporary files deleted.
+echo.
+
+REM Run Disk Cleanup (silent mode)
+echo Running Disk Cleanup...
+cleanmgr /sagerun:1
+echo Disk Cleanup initiated (may take time in background).
+echo.
+
+REM Optional: Run System File Checker (uncomment if needed)
+echo Running System File Checker...
+sfc /scannow
+echo SFC completed.
+
+REM Optional: Defragment C: drive (uncomment if needed; requires admin)
+echo Defragmenting C: drive...
+defrag C: /O
+echo Defragmentation completed.
+
+echo Optimization complete. Reboot recommended for full effect.
+pause
