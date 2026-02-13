@@ -8,7 +8,7 @@ WINDOWS
 ARCH LINUX
 
   Copy the code into a text editor and save as LostOptimizer.sh (or any name, just put ".sh" at the end.
-  Make it executable: chmod +x optimize_arch.sh.
-  Run as root: sudo ./optimize_arch.sh.
+  Make it executable: chmod +x [your file name].sh.
+  Run as root: sudo ./[your file name].sh.
   The script will execute sequentially.
 
